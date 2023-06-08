@@ -1,4 +1,4 @@
-package com.estancias.estancias;
+package com.estancias;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
