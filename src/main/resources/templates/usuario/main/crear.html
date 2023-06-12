@@ -1,0 +1,9 @@
+<main th:fragment="contentTemplate">
+    <div th:if="${exito}!=null" class="card text-white bg-success mb-3 mt-3">
+        <div class="card-body">
+            <h5 class="card-title" th:text="${exito}"></h5>
+            <p class="card-text" th:text="${usuario.getAlias()}"></p>
+            <p class="card-text" th:text="${usuario.getEmail()}"></p>
+        </div>
+    </div>
+</main>

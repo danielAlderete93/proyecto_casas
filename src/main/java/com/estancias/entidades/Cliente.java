@@ -12,9 +12,7 @@ import lombok.*;
 @Getter
 @Setter
 @Entity(name = "clientes")
-public class Cliente extends EntidadPersistente {
-
-    @Column
+public class Cliente extends EntidadPersistente { @Column
     private String nombre;
     @Column
     private String calle;

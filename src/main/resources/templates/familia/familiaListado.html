@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Listado de usuario</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/js/all.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+</head>
+<body>
+
+<main class="container-lg">
+
+    <div class="header text-center">
+        <h1><u>Listado de familias</u></h1>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered  table-hover text-center">
+            <thead class="table-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Email</th>
+                <th scope="col">Nº Hijos</th>
+                <th scope="col">Edad minima-maxima</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="familia : ${familias}">
+                <td th:text="${familia.id}"></td>
+                <td th:text="${familia.nombre}"></td>
+                <td th:text="${familia.email}"></td>
+                <td th:text="${familia.numHijos}"></td>
+                <td th:text="${familia.edadMin}+'-'+${familia.edadMax}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+</body>
+</html>

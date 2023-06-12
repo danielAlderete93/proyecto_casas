@@ -1,19 +1,22 @@
 package com.estancias.entidades;
 
 
-import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.MappedSuperclass;
 
 
-@Getter
-@Setter
-public abstract class EntidadPersistente {
+@MappedSuperclass
+public class EntidadPersistente {
     @Id
-    @Column(nullable = false, unique = true)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Integer id;
+    @GeneratedValue
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

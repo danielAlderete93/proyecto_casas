@@ -13,6 +13,7 @@ import java.util.Date;
 @Builder
 @Getter
 @Setter
+@ToString
 @Entity(name = "usuarios")
 public class Usuario extends EntidadPersistente {
 
@@ -28,4 +29,8 @@ public class Usuario extends EntidadPersistente {
     @Column(nullable = true)
     @Temporal(TemporalType.DATE)
     private Date fechaBaja;
+
+    public boolean estaActivo() {
+        return this.fechaBaja == null;
+    }
 }

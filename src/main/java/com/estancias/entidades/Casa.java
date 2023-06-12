@@ -5,12 +5,13 @@ import lombok.*;
 
 import java.util.Date;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
 @Builder
-@Entity(name = "casas")
+@Entity
+@Table(name = "casa")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Casa extends EntidadPersistente {
     @Column
     private String calle;

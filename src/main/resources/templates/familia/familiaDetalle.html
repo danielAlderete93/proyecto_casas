@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Detalle de familia</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/js/all.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+</head>
+<body>
+
+<main class="container-lg ">
+
+    <div class="header text-center">
+        <h1><u>Detalle de familia</u></h1>
+    </div>
+
+    <div class="card m-auto" style="width: 35rem;">
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <!--Id-->
+                <li class="list-group-item">
+                    <p class="card-text">
+                        #<span th:text="${familia.id}"></span>
+                    </p>
+                </li>
+                <!--Nombre-->
+                <li class="list-group-item">
+                    <p class="card-text">
+                        <i class="fa-solid fa-people-roof"></i>Nombre:
+                        <span th:text="${familia.nombre}"></span>
+                    </p>
+                </li>
+                <!--Email-->
+                <li class="list-group-item">
+                    <p class="card-text">
+                        <i class="fa-solid fa-envelope"></i>Email:
+                        <span th:text="${familia.email}"></span>
+                    </p>
+                </li>
+                <!--Hijos-->
+                <li class="list-group-item">
+                    <p class="card-text">
+                        <i class="fa-solid fa-child"></i>Hijos:
+                        <span th:text="${familia.numHijos}+' entre '+${familia.edadMin}+' a '+${familia.edadMax}+' años'"></span>
+                    </p>
+                </li>
+            </ul>
+        </div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
+        integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS"
+        crossorigin="anonymous"></script>
+</body>
+</html>

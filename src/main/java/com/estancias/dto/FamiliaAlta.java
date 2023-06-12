@@ -1,4 +1,4 @@
-package com.estancias.controladores.dto;
+package com.estancias.dto;
 
 import lombok.Builder;
 import lombok.Data;
@@ -11,5 +11,5 @@ public class FamiliaAlta {
     private Integer edadMax;
     private Integer numHijos;
     private String email;
-    private UsuarioAlta usuarioAlta;
+    private Integer idUsuario;
 }

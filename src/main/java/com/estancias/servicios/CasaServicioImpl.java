@@ -1,6 +1,6 @@
 package com.estancias.servicios;
 
-import com.estancias.controladores.dto.CasaAlta;
+import com.estancias.dto.CasaAlta;
 import com.estancias.entidades.Casa;
 import com.estancias.entidades.Familia;
 import com.estancias.repositorios.interfaces.CRUDBaseRepository;

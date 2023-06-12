@@ -1,6 +1,6 @@
 package com.estancias.servicios.interfaces;
 
-import com.estancias.controladores.dto.EstanciaAlta;
+import com.estancias.dto.EstanciaAlta;
 import com.estancias.entidades.Estancia;
 
 public interface EstanciaServicio {

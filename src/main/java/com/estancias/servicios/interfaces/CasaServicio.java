@@ -1,6 +1,6 @@
 package com.estancias.servicios.interfaces;
 
-import com.estancias.controladores.dto.CasaAlta;
+import com.estancias.dto.CasaAlta;
 import com.estancias.entidades.Casa;
 
 public interface CasaServicio {

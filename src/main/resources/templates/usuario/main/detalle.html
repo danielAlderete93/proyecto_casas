@@ -1,0 +1,76 @@
+<main th:fragment="contentTemplate" class="container-lg ">
+
+    <div class="header text-center">
+        <h1><u>Detalle de usuario</u></h1>
+    </div>
+
+    <div class="card m-auto" style="width: 35rem;">
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <!--Id-->
+                <li class="list-group-item">
+                    <p class="card-text">
+                        #<span th:text="${usuario.id}"></span>
+                    </p>
+                </li>
+                <!--Esta activo-->
+                <li class="list-group-item">
+                    <p class="card-text ">
+                        <span th:if="${estaActivo}">
+                            <i class="fa-solid fa-circle-check text-success"></i>Estado: Activo
+                         </span>
+                        <span th:unless="${estaActivo}">
+                            <i class="fa-solid fa-circle-xmark text-danger"></i>Estado: Innactivo
+                        </span>
+                    </p>
+                </li>
+                <!--Alias-->
+                <li class="list-group-item">
+                    <p class="card-text">
+                        <i class="fa-solid fa-user"></i>Alias:
+                        <span th:text="${usuario.alias}"></span>
+                    </p>
+                </li>
+                <!--Clave-->
+                <li class="list-group-item ">
+                    <div class="d-flex justify-content-between">
+                        <p class="card-text  m-0">
+
+                            <i class="fa-solid fa-user"></i>Clave:*******
+                        </p>
+                        <a href="#">Cambiar clave?</a>
+                    </div>
+                    <span th:if="${nuevaClave} != null">
+                        <small class="text-muted"><span th:text="${nuevaClave}"></span></small>
+                    </span>
+                </li>
+                <!--Fecha alta-->
+                <li class="list-group-item">
+                    <p class="card-text">
+                        <i class="fa-solid fa-calendar-plus"></i>Fecha alta:
+                        <span th:text="${usuario.fechaAlta}"></span>
+                    </p>
+                </li>
+                <!--Fecha baja-->
+                <li class="list-group-item">
+                    <p class="card-text">
+                        <i class="fa-solid fa-calendar-xmark"></i>Fecha baja:
+                        <span th:if="${usuario.fechaBaja}!=null" th:text="${usuario.fechaBaja}"></span>
+                        <span th:unless="${usuario.fechaBaja}!=null">-</span>
+                    </p>
+                </li>
+            </ul>
+            <div class="card-body">
+                <button class="btn btn-primary" type="submit">Cambiar contraseña</button>
+
+                <form id="formBaja" th:action="@{/api/usuario/baja/{idUsuario}(idUsuario=${usuario.id})}"
+                      method=post>
+                    <a href="#" onclick="event.preventDefault(); document.getElementById('formBaja').submit();"
+                       type="button" class="btn btn-outline-danger">Dar baja</a>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</main>

@@ -1,4 +1,4 @@
-package com.estancias.controladores.dto;
+package com.estancias.dto;
 
 import lombok.Builder;
 import lombok.Data;

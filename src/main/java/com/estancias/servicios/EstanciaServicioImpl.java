@@ -1,6 +1,6 @@
 package com.estancias.servicios;
 
-import com.estancias.controladores.dto.EstanciaAlta;
+import com.estancias.dto.EstanciaAlta;
 import com.estancias.entidades.Casa;
 import com.estancias.entidades.Cliente;
 import com.estancias.entidades.Estancia;
