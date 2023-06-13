@@ -6,10 +6,14 @@ import com.estancias.entidades.Usuario;
 import com.estancias.repositorios.interfaces.CRUDBaseRepository;
 import com.estancias.servicios.interfaces.ClienteServicio;
 import com.estancias.servicios.interfaces.UsuarioServicio;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
+@Slf4j
 public class ClienteServiceImpl implements ClienteServicio {
     private final CRUDBaseRepository<Cliente> repository;
     private final UsuarioServicio usuarioServicio;
@@ -21,29 +25,37 @@ public class ClienteServiceImpl implements ClienteServicio {
     }
 
     @Override
-    public Cliente crearCliente(ClienteAlta clienteAlta) {
+    public Integer crearCliente(ClienteAlta clienteAlta) {
 
         //TODO: Validar
         //Exceptions
 
         //Crear usuario->tratar exception
-        Usuario usuario = usuarioServicio.altaUsuario(clienteAlta.getUsuario());
+        Usuario usuario = usuarioServicio.consulta(clienteAlta.getIdUsuario());
 
         //Si pasa el try->
         Cliente clienteCreado = creaClienteDesdeClienteAlta(clienteAlta);
         clienteCreado.setUsuario(usuario);
 
         Integer id = repository.guardar(clienteCreado);
-
+        log.info("Se creó cliente con id:", id);
         //Guardarlo
-        return repository.obtenerPorID(id);
+        return id;
 
     }
 
     @Override
+    public List<Cliente> consulta() {
+        log.atInfo().log("Se busca a todos los clientes");
+        return repository.listarTodas();
+    }
+
+    @Override
     public Cliente consulta(Integer idCliente) {
+        log.atInfo().log("Se busca a cliente con id:" + idCliente);
         return repository.obtenerPorID(idCliente);
     }
+
 
     @Override
     public Cliente modificacion(Integer idCliente, ClienteAlta clienteAlta) {
@@ -58,15 +70,21 @@ public class ClienteServiceImpl implements ClienteServicio {
 
         clienteAEditar.editateConDatosDe(clienteConDatosNuevos);
 
+        log.info("Se actualizó el objeto: {}", clienteAEditar);
         return repository.obtenerPorID(idCliente);
     }
 
     @Override
     public boolean eliminacion(Integer idCliente) {
-        return repository.borrar(idCliente);
+        boolean sePudoElimino = repository.borrar(idCliente);
+        if (sePudoElimino) {
+            log.warn("Se eliminó el objeto con ID: {}", idCliente);
+        }
+
+        return sePudoElimino;
     }
 
-    private Cliente creaClienteDesdeClienteAlta(ClienteAlta clienteAlta){
+    private Cliente creaClienteDesdeClienteAlta(ClienteAlta clienteAlta) {
         return Cliente.builder()
                 .numero(clienteAlta.getNumero())
                 .pais(clienteAlta.getPais())

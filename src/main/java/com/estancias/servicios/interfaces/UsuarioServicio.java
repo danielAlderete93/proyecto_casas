@@ -6,7 +6,7 @@ import com.estancias.entidades.Usuario;
 import java.util.List;
 
 public interface UsuarioServicio {
-    Usuario altaUsuario(UsuarioAlta usuarioAlta);
+    Integer altaUsuario(UsuarioAlta usuarioAlta);
 
     Usuario consulta(Integer id);
 

@@ -1,0 +1,19 @@
+<main th:fragment="contentTemplate" class="container-lg">
+
+    <div class="header text-center">
+        <h1><u>Detalle de casa</u></h1>
+    </div>
+
+    <div class="card m-auto" style="width: 35rem;">
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <!--Id-->
+                <li class="list-group-item">
+                    <p class="card-text">
+                        #<span th:text="${casa.id}"></span>
+                    </p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</main>

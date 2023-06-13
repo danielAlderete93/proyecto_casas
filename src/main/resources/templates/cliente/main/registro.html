@@ -1,0 +1,39 @@
+<main th:fragment="contentTemplate" class="container-sm">
+    <h1>Registrate como cliente</h1>
+    <form class="row g-3" action="/casa/registro" method="post">
+        <div class="col-12">
+            <div>
+                <label for="calle" class="form-label">Calle</label>
+                <input type="text" class="form-control" id="calle" name="calle">
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div>
+                <label for="calle" class="form-label">Calle</label>
+                <input type="text" class="form-control" id="calle" name="calle">
+            </div>
+            <div>
+                <label for="numero" class="form-label">Numero</label>
+                <input type="number" class="form-control" id="numero" name="numero" min="0">
+            </div>
+            <div>
+                <label for="codigo-postal" class="form-label">Codigo postal</label>
+                <input type="text" class="form-control" id="codigo-postal" name="codigo-postal">
+            </div>
+        </div>
+        <div class="col-12">
+            <div>
+                <label for="ciudad" class="form-label">Ciudad</label>
+                <input type="text" class="form-control" id="ciudad" name="ciudad">
+            </div>
+            <div>
+                <label for="pais" class="form-label">Pais</label>
+                <input type="text" class="form-control" id="pais" name="pais">
+            </div>
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Crear</button>
+        </div>
+    </form>
+</main>

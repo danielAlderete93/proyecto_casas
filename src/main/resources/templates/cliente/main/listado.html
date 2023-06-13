@@ -1,0 +1,38 @@
+<main th:fragment="contentTemplate" class="container-lg">
+
+    <div class="header text-center">
+        <h1><u>Listado de casa</u></h1>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered  table-hover text-center">
+            <thead class="table-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Tipo Vivienda</th>
+                <th scope="col">Propietario</th>
+                <th scope="col">Fecha desde</th>
+                <th scope="col">Fecha hasta</th>
+                <th scope="col">Dias (min-max)</th>
+                <th scope="col">Direccion</th>
+                <th scope="col">Ciudad</th>
+                <th scope="col">Pais</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="casa : ${casas}">
+                <td th:text="${casa.id}"></td>
+                <td th:text="${casa.tipoVivienda}"></td>
+                <td>Aca el prop</td>
+                <td th:text="${casa.fechaDesde}"></td>
+                <td th:text="${casa.fechaHasta}"></td>
+                <td th:text="${casa.minDias}+'-'+${casa.maxDias}"></td>
+                <td th:text="${casa.calle}+ ' ' + ${casa.numero} +  ', ' + ${casa.codPostal}"></td>
+                <td th:text="${casa.calle}+ ' ' + ${casa.numero} +  ', ' + ${casa.codPostal}"></td>
+                <td th:text="${casa.ciudad}"></td>
+                <td th:text="${casa.pais}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>

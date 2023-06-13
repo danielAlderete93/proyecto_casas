@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -26,7 +26,7 @@ public class UsuarioServiceImpl implements UsuarioServicio {
 
     @Override
     @Transactional()
-    public Usuario altaUsuario(UsuarioAlta usuarioAlta) {
+    public Integer altaUsuario(UsuarioAlta usuarioAlta) {
         //TODO: Validar
         //Exceptions
         //Crear usuario
@@ -34,15 +34,15 @@ public class UsuarioServiceImpl implements UsuarioServicio {
                 .alias(usuarioAlta.getAlias())
                 .clave(usuarioAlta.getClave())
                 .email(usuarioAlta.getEmail())
-                .fechaAlta(new Date())
+                .fechaAlta(LocalDateTime.now())
                 .fechaBaja(null)
                 .build();
 
-        Integer id = usuarioRepository.guardar(usuario);
-        log.info("Se creó el objeto: {}", usuario);
+        Integer idUsuario = usuarioRepository.guardar(usuario);
+        log.info("Se creó usuario con id:", idUsuario);
 
         //Guardarlo
-        return usuarioRepository.obtenerPorID(id);
+        return idUsuario;
     }
 
     @Override
@@ -65,7 +65,7 @@ public class UsuarioServiceImpl implements UsuarioServicio {
         Usuario usuarioModificado = usuarioRepository.obtenerPorID(id);
 
         //lo doy de baja
-        usuarioModificado.setFechaBaja(new Date());
+        usuarioModificado.setFechaBaja(LocalDateTime.now());
 
         //Guardo la baja
         usuarioRepository.guardar(usuarioModificado);

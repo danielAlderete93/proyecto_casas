@@ -1,0 +1,62 @@
+<main th:fragment="contentTemplate" class="container-sm">
+    <h1>Registrar casa</h1>
+    <form class="row g-3" action="/casa/registro" method="post">
+        <div class="col-12">
+            <div>
+                <label for="tipo-vivienda" class="form-label">Tipo vivienda</label>
+                <input type="text" class="form-control" id="tipo-vivienda" name="tipo-vivienda">
+            </div>
+            <div>
+                <label for="precio" class="form-label">Precio</label>
+                <input type="number" class="form-control" id="precio" name="precio">
+            </div>
+        </div>
+        <div class="col-12">
+            <div>
+                <label for="fecha-desde" class="form-label">Fecha desde</label>
+                <input type="date" class="form-control" id="fecha-desde" name="fecha-desde">
+            </div>
+            <div>
+                <label for="fecha-hasta" class="form-label">Fecha hasta</label>
+                <input type="date" class="form-control" id="fecha-hasta" name="fecha-hasta">
+            </div>
+        </div>
+        <div class="col-12">
+            <div>
+                <label for="dia-min" class="form-label">Dias minimos</label>
+                <input type="number" class="form-control" id="dia-min" name="dia-min">
+            </div>
+            <div>
+                <label for="dia-max" class="form-label">Dias maximo</label>
+                <input type="number" class="form-control" id="dia-max" name="dia-max">
+            </div>
+        </div>
+        <div class="col-12">
+            <div>
+                <label for="calle" class="form-label">Calle</label>
+                <input type="text" class="form-control" id="calle" name="calle">
+            </div>
+            <div>
+                <label for="numero" class="form-label">Numero</label>
+                <input type="number" class="form-control" id="numero" name="numero" min="0">
+            </div>
+            <div>
+                <label for="codigo-postal" class="form-label">Codigo postal</label>
+                <input type="text" class="form-control" id="codigo-postal" name="codigo-postal">
+            </div>
+        </div>
+        <div class="col-12">
+            <div>
+                <label for="ciudad" class="form-label">Ciudad</label>
+                <input type="text" class="form-control" id="ciudad" name="ciudad">
+            </div>
+            <div>
+                <label for="pais" class="form-label">Pais</label>
+                <input type="text" class="form-control" id="pais" name="pais">
+            </div>
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Crear</button>
+        </div>
+    </form>
+</main>

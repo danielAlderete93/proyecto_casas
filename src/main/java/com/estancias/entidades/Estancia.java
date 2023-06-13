@@ -4,6 +4,7 @@ package com.estancias.entidades;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 
@@ -18,10 +19,9 @@ public class Estancia extends EntidadPersistente {
     @Column
     private String huesped;
     @Column
-    @Temporal(TemporalType.DATE)
-    private Date fechaDesde;
-    @Temporal(TemporalType.DATE)
-    private Date fechaHasta;
+    private LocalDateTime fechaDesde;
+    @Column
+    private LocalDateTime fechaHasta;
     @ManyToOne
     private Cliente cliente;
     @ManyToOne

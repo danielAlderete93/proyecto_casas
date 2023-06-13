@@ -8,7 +8,11 @@ import com.estancias.repositorios.interfaces.CRUDBaseRepository;
 import com.estancias.servicios.interfaces.CasaServicio;
 import com.estancias.servicios.interfaces.ClienteServicio;
 import com.estancias.servicios.interfaces.EstanciaServicio;
+import com.estancias.utils.FechaConverter;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class EstanciaServicioImpl implements EstanciaServicio {
@@ -17,7 +21,7 @@ public class EstanciaServicioImpl implements EstanciaServicio {
     private ClienteServicio clienteServicio;
 
     @Override
-    public Estancia crearEstancia(EstanciaAlta estanciaAlta) {
+    public Integer crearEstancia(EstanciaAlta estanciaAlta) {
         Cliente cliente = clienteServicio.consulta(estanciaAlta.getIdCliente());
         Casa casa = casaServicio.consulta(estanciaAlta.getIdCasa());
 
@@ -25,7 +29,7 @@ public class EstanciaServicioImpl implements EstanciaServicio {
             return null;
         }
 
-        Estancia estancia = crearEstancia(estanciaAlta);
+        Estancia estancia = creaEstanciaDesdeEstanciaAlta(estanciaAlta);
         estancia.setCasa(casa);
         estancia.setCliente(cliente);
 
@@ -33,12 +37,17 @@ public class EstanciaServicioImpl implements EstanciaServicio {
         Integer idEstancia = repository.guardar(estancia);
 
         //Devuelvo el usuario guardado
-        return repository.obtenerPorID(idEstancia);
+        return idEstancia;
     }
 
     @Override
     public Estancia consulta(Integer idEstancia) {
         return repository.obtenerPorID(idEstancia);
+    }
+
+    @Override
+    public List<Estancia> consulta() {
+        return repository.listarTodas();
     }
 
     @Override
@@ -65,10 +74,14 @@ public class EstanciaServicioImpl implements EstanciaServicio {
     }
 
     private Estancia creaEstanciaDesdeEstanciaAlta(EstanciaAlta estanciaAlta) {
+
+        LocalDateTime fechaDesde = FechaConverter.convertiCadena(estanciaAlta.getFechaDesde());
+        LocalDateTime fechaHasta = FechaConverter.convertiCadena(estanciaAlta.getFechaHasta());
+
         return Estancia.builder()
                 .huesped(estanciaAlta.getHuesped())
-                .fechaHasta(estanciaAlta.getFechaHasta())
-                .fechaDesde(estanciaAlta.getFechaDesde())
+                .fechaDesde(fechaDesde)
+                .fechaHasta(fechaHasta)
                 .build();
     }
 }

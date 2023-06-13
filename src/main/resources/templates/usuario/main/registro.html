@@ -1,0 +1,20 @@
+<main th:fragment="contentTemplate" class="container-sm">
+    <h1>Registrate</h1>
+    <form class="row g-3" action="/usuario/registro" method="post">
+        <div class="col-12">
+            <label for="alias" class="form-label">Alias</label>
+            <input type="text" class="form-control" id="alias" name="alias">
+        </div>
+        <div class="col-12">
+            <label for="clave" class="form-label">Clave</label>
+            <input type="password" class="form-control" id="clave" name="clave">
+        </div>
+        <div class="col-12">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email">
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Registrate</button>
+        </div>
+    </form>
+</main>

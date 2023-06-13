@@ -3,8 +3,6 @@ package com.estancias.dto;
 import lombok.Builder;
 import lombok.Data;
 
-import java.util.Date;
-
 @Data
 @Builder
 public class CasaAlta {
@@ -14,8 +12,8 @@ public class CasaAlta {
     private String ciudad;
     private String pais;
     private Double precio;
-    private Date fechaDesde;
-    private Date fechaHasta;
+    private String fechaDesde;
+    private String fechaHasta;
     private Integer minDias;
     private Integer maxDias;
     private String tipoVivienda;

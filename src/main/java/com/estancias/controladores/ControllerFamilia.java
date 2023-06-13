@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/api/familia")
+@RequestMapping("/familia")
 public class ControllerFamilia {
     private final FamiliaServicio familiaServicio;
 
@@ -27,41 +27,56 @@ public class ControllerFamilia {
     vez que hayan sido registradas como usuario.
      */
 
-    //Alta
-    @PostMapping(value = "/nuevo", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public String darAltaJson(@RequestBody FamiliaAlta familiaAlta, ModelMap modelo) {
+   @GetMapping(value = "/registro")
+    public String vistaRegistro(ModelMap modelo) {
+        modelo.addAttribute("main", "familia/main/registro");
+        return "base";
+    }
+
+    @PostMapping(value = "/registro")
+    public String registrar(@RequestParam String nombre,
+                            @RequestParam("edad-min") Integer edadMin,
+                            @RequestParam("edad-max") Integer edadMax,
+                            @RequestParam("num-hijos") Integer numHijos,
+                            @RequestParam String email) {
+        //TODO SE DEBE ARMAR DESDE EL LOGIN DE SPRINGBOOT
+        FamiliaAlta familiaAlta = FamiliaAlta.builder()
+                .numHijos(numHijos)
+                .edadMax(edadMax)
+                .edadMin(edadMin)
+                .email(email)
+                .idUsuario(1102)
+                .nombre(nombre)
+                .build();
 
         Familia familia = familiaServicio.crearFamilia(familiaAlta);
 
-        modelo.put("exito", "El familia fue registrado correctamente!");
-        modelo.put("familia", familia);
 
-
-        return "familia/familiaCreado";
+        return "redirect:/usuario/login";
 
     }
 
     //ListarTodos
     @GetMapping(value = "/listar/todos")
-    public String listarTodos(ModelMap modelo) {
+    public String vistaListaTodos(ModelMap modelo) {
         List<Familia> familias = familiaServicio.consulta();
 
         modelo.put("familias", familias);
+        modelo.addAttribute("main", "familia/main/listado");
 
-
-        return "familia/familiaListado";
+        return "base";
 
     }
 
     //ListarPorID
     @GetMapping(value = "/listar/{idFamilia}")
-    public String listarSegunId(@PathVariable Integer idFamilia, ModelMap modelo) {
+    public String vistaListaPorID(@PathVariable Integer idFamilia, ModelMap modelo) {
         Familia familia = familiaServicio.consulta(idFamilia);
 
         modelo.put("familia", familia);
+        modelo.addAttribute("main", "familia/main/detalle");
 
-
-        return "familia/familiaDetalle";
+        return "base";
 
     }
 
@@ -86,7 +101,7 @@ public class ControllerFamilia {
         //todo:vista
 
 
-        return "redirect:/api/familia/listar/todos";
+        return "redirect:/familia/listar/todos";
 
     }
 

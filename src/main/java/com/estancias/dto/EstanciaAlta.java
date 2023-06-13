@@ -9,8 +9,8 @@ import java.util.Date;
 @Builder
 public class EstanciaAlta {
     private String huesped;
-    private Date fechaDesde;
-    private Date fechaHasta;
+    private String fechaDesde;
+    private String fechaHasta;
     private Integer idCliente;
     private Integer idCasa;
 }

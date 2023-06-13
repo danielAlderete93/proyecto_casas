@@ -1,0 +1,7 @@
+<div th:fragment="alerta"
+     th:classappend="|alert alert-${tipoAlerta} ${not (tipoAlerta == 'success' or tipoAlerta == 'warning' or tipoAlerta == 'info')? ' d-none' : ''} |"
+     class=" alert-dismissible fade show" role="alert">
+    <span th:text="${mensaje}"></span>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+            th:if="${tipoAlerta != null}"></button>
+</div>

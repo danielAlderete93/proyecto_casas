@@ -1,0 +1,27 @@
+<main th:fragment="contentTemplate" class="container-sm">
+    <h1>Selecciona tipo de usuario.</h1>
+    <form id="usuarioForm" class="row g-3" action="/usuario/seleccion" method="post">
+        <div class="col-6">
+            <label class="card card-body btn btn-secondary" for="familia" onclick="submitForm('familia')">
+                <input type="radio" class="btn-check" name="tipo" id="familia" value="familia" autocomplete="off" checked>
+                <h5 class="card-title">Familia</h5>
+                <p class="card-text">Descripción de la opción de Familia</p>
+            </label>
+        </div>
+
+        <div class="col-6">
+            <label class="card card-body btn btn-secondary" for="cliente" onclick="submitForm('cliente')">
+                <input type="radio" class="btn-check" name="tipo" id="cliente" value="cliente" autocomplete="off">
+                <h5 class="card-title">Cliente</h5>
+                <p class="card-text">Descripción de la opción de Cliente</p>
+            </label>
+        </div>
+    </form>
+</main>
+
+<script>
+    function submitForm(tipo) {
+        document.getElementById('usuarioForm').tipo.value = tipo;
+        document.getElementById('usuarioForm').submit();
+    }
+</script>

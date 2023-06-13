@@ -13,5 +13,5 @@ public class ClienteAlta {
     private String ciudad;
     private String pais;
     private String email;
-    private UsuarioAlta usuario;
+    private Integer idUsuario;
 }

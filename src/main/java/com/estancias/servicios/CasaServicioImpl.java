@@ -6,10 +6,16 @@ import com.estancias.entidades.Familia;
 import com.estancias.repositorios.interfaces.CRUDBaseRepository;
 import com.estancias.servicios.interfaces.CasaServicio;
 import com.estancias.servicios.interfaces.FamiliaServicio;
+import com.estancias.utils.FechaConverter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 @Service
+@Slf4j
 public class CasaServicioImpl implements CasaServicio {
 
     private final CRUDBaseRepository<Casa> repository;
@@ -22,7 +28,7 @@ public class CasaServicioImpl implements CasaServicio {
     }
 
     @Override
-    public Casa crearCasa(CasaAlta casaAlta) {
+    public Integer crearCasa(CasaAlta casaAlta) {
         //Validar CasaAlta
         Familia propietario = familiaServicio.consulta(casaAlta.getIdPropietario());
         //Validar propietario
@@ -32,14 +38,21 @@ public class CasaServicioImpl implements CasaServicio {
 
 
         Integer id = repository.guardar(casa);
-
+        log.info("Se creó casa con id:", id);
         //Guardarlo
-        return repository.obtenerPorID(id);
+        return id;
     }
 
     @Override
     public Casa consulta(Integer idCasa) {
+        log.atInfo().log("Se busca a casa con id:" + idCasa);
         return repository.obtenerPorID(idCasa);
+    }
+
+    @Override
+    public List<Casa> consulta() {
+        log.atInfo().log("Se busca a usuario todas las casas");
+        return repository.listarTodas();
     }
 
     @Override
@@ -65,6 +78,8 @@ public class CasaServicioImpl implements CasaServicio {
     }
 
     private Casa creaCasaDesdeCasaAlta(CasaAlta casaAlta) {
+        LocalDateTime fechaDesde = FechaConverter.convertiCadena(casaAlta.getFechaDesde());
+        LocalDateTime fechaHasta = FechaConverter.convertiCadena(casaAlta.getFechaHasta());
         return Casa.builder()
                 .maxDias(casaAlta.getMaxDias())
                 .minDias(casaAlta.getMinDias())
@@ -72,8 +87,8 @@ public class CasaServicioImpl implements CasaServicio {
                 .pais(casaAlta.getPais())
                 .precio(casaAlta.getPrecio())
                 .numero(casaAlta.getNumero())
-                .fechaDesde(casaAlta.getFechaDesde())
-                .fechaHasta(casaAlta.getFechaHasta())
+                .fechaDesde(fechaDesde)
+                .fechaHasta(fechaHasta)
                 .ciudad(casaAlta.getCiudad())
                 .tipoVivienda(casaAlta.getTipoVivienda())
                 .codPostal(casaAlta.getCodPostal())

@@ -4,7 +4,6 @@ import com.estancias.dto.UsuarioAlta;
 import com.estancias.entidades.Usuario;
 import com.estancias.servicios.interfaces.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 @Controller
-@RequestMapping("/api/usuario")
+@RequestMapping("/usuario")
 public class ControllerUsuario {
     /*
     UsuarioController
@@ -29,19 +28,56 @@ public class ControllerUsuario {
         this.usuarioServicio = usuarioServicio;
     }
 
-    //AltaUsuario
-    @PostMapping(value = "/nuevo", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public String crear(@RequestBody UsuarioAlta usuarioAlta, ModelMap modelo) {
-        Usuario usuario = usuarioServicio.altaUsuario(usuarioAlta);
+    //Login por Form
+    @GetMapping(value = "/login")
+    public String login() {
+        return "login/login";
+    }
 
-        modelo.put("exito", "El usuario fue registrado correctamente!");
-        modelo.put("usuario", usuario);
-        modelo.addAttribute("main", "usuario/main/crear");
+    //Registro por Form
+    @GetMapping(value = "/registro")
+    public String vistaRegistro(ModelMap modelo) {
+        modelo.addAttribute("main", "usuario/main/registro");
+        return "base";
+    }
+
+    @PostMapping(value = "/registro")
+    public String crearPorForm(@RequestParam String alias,
+                               @RequestParam String clave,
+                               @RequestParam String email,
+                               ModelMap modelo) {
+        UsuarioAlta usuarioAlta = UsuarioAlta.builder().email(email).alias(alias).clave(clave).build();
+        Integer idUsuario = usuarioServicio.altaUsuario(usuarioAlta);
+
+        modelo.addAttribute("mensaje", "¡Usuario fue dado de alta exitosamente!");
+        modelo.addAttribute("tipoAlerta", "success");
+        modelo.addAttribute("main", "usuario/main/seleccionTipoUsuario");
+        modelo.addAttribute("idUsuario", idUsuario);
 
 
         return "base";
 
     }
+
+    @PostMapping(value = "/seleccion")
+    public String seleccionUsuario(@RequestParam("tipo") String tipo, RedirectAttributes modelo) {
+        //if (tipo.equalsIgnoreCase("familia")) {
+        modelo.addFlashAttribute("mensaje", "Se seleccionó familia");
+        modelo.addFlashAttribute("tipoAlerta", "success");
+        modelo.addFlashAttribute("main", "usuario/main/crear");
+        return "redirect:/familia/registro";
+
+        //}
+       /* if (tipo.equalsIgnoreCase("cliente")) {
+            modelo.addFlashAttribute("mensaje", "Se seleccionó familia");
+            modelo.addFlashAttribute("tipoAlerta", "success");
+            modelo.addAttribute("main", "usuario/main/crear");
+        }
+        return "base";
+
+        */
+    }
+
 
     //ListarTodos
     @GetMapping(value = "/listar/todos")

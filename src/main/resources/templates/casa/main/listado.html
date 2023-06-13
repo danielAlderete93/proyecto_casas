@@ -1,0 +1,35 @@
+<main th:fragment="contentTemplate" class="container-lg">
+
+    <div class="header text-center">
+        <h1><u>Listado de casas</u></h1>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered  table-hover text-center">
+            <thead class="table-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Tipo Vivienda</th>
+                <th scope="col">Fecha (desde-hasta)</th>
+                <th scope="col">Propietario</th>
+                <th scope="col">Precio ($)</th>
+                <th scope="col">Ciudad</th>
+                <th scope="col">Pais</th>
+                <th scope="col">Cant dias (min-max)</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="casa : ${casas}">
+                <td th:text="${casa.id}"></td>
+                <td th:text="${casa.tipoVivienda}"></td>
+                <td th:text="${casa.fechaDesde} +' al ' + ${casa.fechaHasta} "></td>
+                <td th:text="${casa.getPropietario().getNombre()}"></td>
+                <td th:text="${casa.precio}"></td>
+                <td th:text="${casa.ciudad}"></td>
+                <td th:text="${casa.pais}"></td>
+                <td th:text="${casa.minDias}+'a '+ ${casa.maxDias}+ ' dias'"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>

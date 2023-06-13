@@ -1,0 +1,41 @@
+<main th:fragment="contentTemplate" class="container-lg">
+
+    <div class="header text-center">
+        <h1><u>Detalle de cliente</u></h1>
+    </div>
+
+    <div class="card m-auto" style="width: 35rem;">
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <!--Id-->
+                <li class="list-group-item">
+                    <p class="card-text">
+                        #<span th:text="${cliente.id}"></span>
+                    </p>
+                </li>
+                <!--Nombre-->
+                <li class="list-group-item">
+                    <p class="card-text">
+                        <i class="fa-solid fa-user"></i>Nombre:
+                        <span th:text="${cliente.nombre}"></span>
+                    </p>
+                </li>
+                <!--Email-->
+                <li class="list-group-item">
+                    <p class="card-text">
+                        <i class="fa-solid fa-envelope"></i>Email:
+                        <span th:text="${cliente.email}"></span>
+                    </p>
+                </li>
+                <!--Direccion-->
+                <li class="list-group-item">
+                    <p class="card-text">
+                        <i class="fa-solid fa-location-dot"></i>Direccion:
+                        <span th:text="${cliente.calle}+ ' ' + ${cliente.numero} +  ', ' + ${cliente.codPostal}+ ', '+ ${cliente.ciudad} + ', '+ ${cliente.pais}"></span>
+                    </p>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</main>

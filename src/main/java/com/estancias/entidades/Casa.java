@@ -3,6 +3,7 @@ package com.estancias.entidades;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
@@ -24,11 +25,9 @@ public class Casa extends EntidadPersistente {
     @Column
     private String pais;
     @Column
-    @Temporal(TemporalType.TIME)
-    private Date fechaDesde;
+    private LocalDateTime fechaDesde;
     @Column
-    @Temporal(TemporalType.TIME)
-    private Date fechaHasta;
+    private LocalDateTime fechaHasta;
     @Column
     private Integer minDias;
     @Column

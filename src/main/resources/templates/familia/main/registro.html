@@ -1,0 +1,29 @@
+<main th:fragment="contentTemplate" class="container-sm">
+    <h1>Registrate como familia</h1>
+    <form class="row g-3" action="/familia/registro" method="post">
+        <div class="col-12">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" name="nombre">
+        </div>
+        <div class="col-12">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email">
+        </div>
+        <div class="col-12">
+            <div class="input-group">
+                <span class="input-group-text">Rango edades (min-max)</span>
+                <input type="number" aria-label="edad-min" id="edad-min" name="edad-min" class="form-control">
+                <input type="number" aria-label="edad-max" id="edad-max" name="edad-max" class="form-control">
+            </div>
+        </div>
+        <div class="col-12">
+            <label for="num-hijos" class="form-label">Numero de hijos:</label>
+            <input type="number" class="form-control" id="num-hijos" name="num-hijos" min="0">
+        </div>
+
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Registrate</button>
+        </div>
+    </form>
+</main>
