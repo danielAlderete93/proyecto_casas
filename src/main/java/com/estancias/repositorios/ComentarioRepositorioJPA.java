@@ -1,4 +1,4 @@
-package com.estancias.repositorios.interfaces;
+package com.estancias.repositorios;
 
 import com.estancias.entidades.Comentario;
 import org.springframework.data.jpa.repository.JpaRepository;

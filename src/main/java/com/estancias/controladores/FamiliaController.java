@@ -13,11 +13,11 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/familia")
-public class ControllerFamilia {
+public class FamiliaController {
     private final FamiliaServicio familiaServicio;
 
     @Autowired
-    public ControllerFamilia(FamiliaServicio familiaServicio) {
+    public FamiliaController(FamiliaServicio familiaServicio) {
         this.familiaServicio = familiaServicio;
     }
 

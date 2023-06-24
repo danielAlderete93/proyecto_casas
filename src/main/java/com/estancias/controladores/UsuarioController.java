@@ -13,7 +13,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/usuario")
-public class ControllerUsuario {
+public class UsuarioController {
     /*
     UsuarioController
     Esta clase tiene la responsabilidad de llevar adelante las funcionalidades necesarias para operar
@@ -24,7 +24,7 @@ public class ControllerUsuario {
     private final UsuarioServicio usuarioServicio;
 
     @Autowired
-    public ControllerUsuario(UsuarioServicio usuarioServicio) {
+    public UsuarioController(UsuarioServicio usuarioServicio) {
         this.usuarioServicio = usuarioServicio;
     }
 

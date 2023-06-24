@@ -4,7 +4,7 @@ import com.estancias.dto.EstanciaAlta;
 import com.estancias.entidades.Casa;
 import com.estancias.entidades.Cliente;
 import com.estancias.entidades.Estancia;
-import com.estancias.repositorios.interfaces.CRUDBaseRepository;
+import com.estancias.repositorios.CRUDBaseRepository;
 import com.estancias.servicios.interfaces.CasaServicio;
 import com.estancias.servicios.interfaces.ClienteServicio;
 import com.estancias.servicios.interfaces.EstanciaServicio;

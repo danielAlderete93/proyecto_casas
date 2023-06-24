@@ -10,12 +10,15 @@ public interface UsuarioServicio {
 
     Usuario consulta(Integer id);
 
+    Usuario consulta(String alias);
+
     List<Usuario> consulta();
 
-    boolean baja(Integer id);
 
-    boolean cambiarClaveNueva(Integer id, String claveNueva);
+    void baja(Integer id);
+
+    void cambiarClaveNueva(Integer id, String claveNueva);
 
 
-    boolean eliminacion(Integer id);
+    void eliminacion(Integer id);
 }

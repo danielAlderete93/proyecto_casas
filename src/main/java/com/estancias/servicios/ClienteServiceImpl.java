@@ -3,7 +3,7 @@ package com.estancias.servicios;
 import com.estancias.dto.ClienteAlta;
 import com.estancias.entidades.Cliente;
 import com.estancias.entidades.Usuario;
-import com.estancias.repositorios.interfaces.CRUDBaseRepository;
+import com.estancias.repositorios.CRUDBaseRepository;
 import com.estancias.servicios.interfaces.ClienteServicio;
 import com.estancias.servicios.interfaces.UsuarioServicio;
 import lombok.extern.slf4j.Slf4j;

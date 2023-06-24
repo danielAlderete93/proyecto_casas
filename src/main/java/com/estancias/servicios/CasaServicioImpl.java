@@ -3,7 +3,7 @@ package com.estancias.servicios;
 import com.estancias.dto.CasaAlta;
 import com.estancias.entidades.Casa;
 import com.estancias.entidades.Familia;
-import com.estancias.repositorios.interfaces.CRUDBaseRepository;
+import com.estancias.repositorios.CRUDBaseRepository;
 import com.estancias.servicios.interfaces.CasaServicio;
 import com.estancias.servicios.interfaces.FamiliaServicio;
 import com.estancias.utils.FechaConverter;
