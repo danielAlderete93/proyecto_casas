@@ -6,10 +6,16 @@ import com.estancias.excepciones.UsuarioException;
 import com.estancias.repositorios.UsuarioRepositorio;
 import com.estancias.servicios.interfaces.UsuarioServicio;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -131,5 +137,21 @@ public class UsuarioServiceImpl implements UsuarioServicio {
 
         usuarioRepositorio.delete(usuario);
         log.warn("Se eliminó el objeto con ID: {}", id);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String alias) throws UsernameNotFoundException {
+        Usuario usuario = usuarioRepositorio.findByAlias(alias).orElse(null);
+
+        //Usuario nulo -> no login
+        if (usuario == null) {
+            return null;
+        }
+        //Instancio usuario logueado
+        List<GrantedAuthority> permisos = new ArrayList<>();
+        GrantedAuthority rol = new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString());
+        permisos.add(rol);
+
+        return new User(usuario.getAlias(), usuario.getClave(), permisos);
     }
 }
