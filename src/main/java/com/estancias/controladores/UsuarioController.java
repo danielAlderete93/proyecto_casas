@@ -104,10 +104,11 @@ public class UsuarioController {
 
     }
 
+    /*
     //CambiarClave
     @PutMapping(value = "/edita/{idUsuario}/clave")
     public String cambiarClave(@PathVariable Integer idUsuario, @RequestBody String nuevaClave, RedirectAttributes modelo) {
-        boolean seCambioClave = usuarioServicio.cambiarClaveNueva(idUsuario, nuevaClave);
+        boolean seCambioClave = usuarioServicio.cambiarClave(idUsuario, nuevaClave);
 
         if (seCambioClave) {
             modelo.addFlashAttribute("mensaje", "¡La clave del usuario ha sido cambiada exitosamente!");
@@ -122,10 +123,11 @@ public class UsuarioController {
 
     }
 
+
     //BajaDeUsuario
     @PostMapping(value = "/baja/{idUsuario}")
     public String darBaja(@PathVariable Integer idUsuario, RedirectAttributes modelo) {
-        boolean seDioBaja = usuarioServicio.baja(idUsuario);
+        usuarioServicio.baja(idUsuario);
 
         if (seDioBaja) {
             modelo.addFlashAttribute("mensaje", "¡Usuario dado de baja exitosamente!");
@@ -139,5 +141,7 @@ public class UsuarioController {
         return "redirect:/api/usuario/listar/" + idUsuario;
 
     }
+    */
+
 
 }

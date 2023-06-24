@@ -1,9 +1,9 @@
 package com.estancias.repositorios;
 
-import com.estancias.entidades.Familia;
+import com.estancias.entidades.Estancia;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface FamiliaRepositorioJPA extends JpaRepository<Familia, Integer> {
+public interface EstanciaRepositorio extends JpaRepository<Estancia, Integer> {
 }

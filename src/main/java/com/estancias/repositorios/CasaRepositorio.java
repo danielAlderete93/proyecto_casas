@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface CasaRepositorioJPA extends JpaRepository<Casa, Integer> {
+public interface CasaRepositorio extends JpaRepository<Casa, Integer> {
 }

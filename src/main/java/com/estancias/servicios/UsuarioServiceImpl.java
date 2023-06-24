@@ -43,7 +43,7 @@ public class UsuarioServiceImpl implements UsuarioServicio {
                 .build();
 
         Integer idUsuario = usuarioRepositorio.save(usuario).getId();
-        log.atInfo().log("Se creó usuario con id:", idUsuario);
+        log.info("Se creó usuario con id:", idUsuario);
 
 
         return idUsuario;
@@ -51,22 +51,19 @@ public class UsuarioServiceImpl implements UsuarioServicio {
 
     @Override
     public Usuario consulta(Integer id) {
-        log.atInfo()
-                .log("Se busca a usuario con id:" + id);
+        log.info("Se busca a usuario con id:" + id);
         return usuarioRepositorio.findById(id).orElse(null);
     }
 
     @Override
     public Usuario consulta(String alias) {
-        log.atInfo()
-                .log("Se busca a usuario con alias:" + alias);
+        log.info("Se busca a usuario con alias:" + alias);
         return usuarioRepositorio.findByAlias(alias).orElse(null);
     }
 
     @Override
     public List<Usuario> consulta() {
-        log.atInfo()
-                .log("Se busca a todos los usuarios");
+        log.info("Se busca a todos los usuarios");
         return usuarioRepositorio.findAll();
     }
 
@@ -78,13 +75,11 @@ public class UsuarioServiceImpl implements UsuarioServicio {
 
         //Validacion
         if (usuario == null) {
-            log.atError()
-                    .log("No se puede dar de baja usuario " + id + ". El usuario no existe");
+            log.error("No se puede dar de baja usuario " + id + ". El usuario no existe");
             throw new UsuarioException("El usuario no existe.");
         }
         if (!usuario.estaActivo()) {
-            log.atError()
-                    .log("No se puede dar de baja usuario " + id + ". El usuario ya fue dado de baja");
+            log.error("No se puede dar de baja usuario " + id + ". El usuario ya fue dado de baja");
             throw new UsuarioException("El usuario ya fue dado de baja.");
         }
 
@@ -99,20 +94,18 @@ public class UsuarioServiceImpl implements UsuarioServicio {
 
     @Override
     @Transactional()
-    public void cambiarClaveNueva(Integer id, String claveNueva) {
+    public void cambiarClave(Integer id, String claveNueva) {
         //Busco usuario
         Usuario usuario = usuarioRepositorio.findById(id).orElse(null);
 
         //Validacion
         if (usuario == null) {
-            log.atError()
-                    .log("No se puede cambiar clave usuario " + id + ". El usuario no existe");
+            log.error("No se puede cambiar clave usuario " + id + ". El usuario no existe");
             throw new UsuarioException("El usuario no existe.");
         }
 
         if (usuario.esMismaClave(claveNueva)) {
-            log.atError()
-                    .log("No se puede cambiar clave usuario " + id + ". El usuario ya tiene esa clave");
+            log.error("No se puede cambiar clave usuario " + id + ". El usuario ya tiene esa clave");
             throw new UsuarioException("El usuario ya tiene esa clave.");
         }
 
@@ -130,8 +123,7 @@ public class UsuarioServiceImpl implements UsuarioServicio {
 
         //Validacion
         if (usuario == null) {
-            log.atError()
-                    .log("No se puede eliminar usuario " + id + ". El usuario no existe");
+            log.error("No se puede eliminar usuario " + id + ". El usuario no existe");
             throw new UsuarioException("El usuario no existe.");
         }
 
@@ -151,6 +143,7 @@ public class UsuarioServiceImpl implements UsuarioServicio {
         List<GrantedAuthority> permisos = new ArrayList<>();
         GrantedAuthority rol = new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString());
         permisos.add(rol);
+        log.info("Se logueo usuario: {}", alias);
 
         return new User(usuario.getAlias(), usuario.getClave(), permisos);
     }

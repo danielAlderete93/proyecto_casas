@@ -1,17 +1,20 @@
 package com.estancias.entidades;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity(name = "comentarios")
-public class Comentario extends EntidadPersistente{
+public class Comentario extends EntidadPersistente {
 
     @Column
     private String descripcion;

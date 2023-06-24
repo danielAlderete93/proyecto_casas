@@ -18,7 +18,7 @@ public interface UsuarioServicio extends UserDetailsService {
 
     void baja(Integer id);
 
-    void cambiarClaveNueva(Integer id, String claveNueva);
+    void cambiarClave(Integer id, String claveNueva);
 
 
     void eliminacion(Integer id);

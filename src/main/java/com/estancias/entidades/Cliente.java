@@ -1,9 +1,10 @@
 package com.estancias.entidades;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToOne;
 import lombok.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 
 
 @AllArgsConstructor
@@ -12,7 +13,8 @@ import lombok.*;
 @Getter
 @Setter
 @Entity(name = "clientes")
-public class Cliente extends EntidadPersistente { @Column
+public class Cliente extends EntidadPersistente {
+    @Column
     private String nombre;
     @Column
     private String calle;

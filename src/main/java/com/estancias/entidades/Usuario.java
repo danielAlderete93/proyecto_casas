@@ -1,11 +1,11 @@
 package com.estancias.entidades;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import lombok.*;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
@@ -44,6 +44,6 @@ public class Usuario extends EntidadPersistente {
     }
 
     public boolean esMismaClave(String clave) {
-        return  this.clave.equals(clave);
+        return this.clave.equals(clave);
     }
 }

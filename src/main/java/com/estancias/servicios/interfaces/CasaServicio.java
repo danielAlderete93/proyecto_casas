@@ -15,6 +15,6 @@ public interface CasaServicio {
 
     Casa modificacion(Integer id, CasaAlta casaModificada);
 
-    boolean eliminacion(Integer id);
+    void eliminacion(Integer id);
 
 }

@@ -49,7 +49,7 @@ public class FamiliaController {
                 .nombre(nombre)
                 .build();
 
-        Familia familia = familiaServicio.crearFamilia(familiaAlta);
+       familiaServicio.crearFamilia(familiaAlta);
 
 
         return "redirect:/usuario/login";

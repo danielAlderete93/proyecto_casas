@@ -14,5 +14,5 @@ public interface ClienteServicio {
 
     Cliente modificacion(Integer idCliente, ClienteAlta clienteAlta);
 
-    boolean eliminacion(Integer idCliente);
+    void eliminacion(Integer idCliente);
 }

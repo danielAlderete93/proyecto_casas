@@ -14,5 +14,5 @@ public interface EstanciaServicio {
 
     Estancia modificacion(Integer idEstancia, EstanciaAlta estanciaAlta);
 
-    boolean eliminacion(Integer idEstancia);
+    void eliminacion(Integer idEstancia);
 }

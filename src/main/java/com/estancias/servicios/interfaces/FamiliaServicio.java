@@ -6,7 +6,7 @@ import com.estancias.entidades.Familia;
 import java.util.List;
 
 public interface FamiliaServicio {
-    Familia crearFamilia(FamiliaAlta alta);
+    Integer crearFamilia(FamiliaAlta alta);
 
     Familia consulta(Integer id);
 
@@ -14,5 +14,5 @@ public interface FamiliaServicio {
 
     Familia modificacion(Integer id, FamiliaAlta alta);
 
-    boolean eliminacion(Integer id);
+    void eliminacion(Integer id);
 }

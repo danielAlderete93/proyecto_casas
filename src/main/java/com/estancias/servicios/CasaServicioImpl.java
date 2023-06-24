@@ -3,12 +3,12 @@ package com.estancias.servicios;
 import com.estancias.dto.CasaAlta;
 import com.estancias.entidades.Casa;
 import com.estancias.entidades.Familia;
-import com.estancias.repositorios.CRUDBaseRepository;
+import com.estancias.excepciones.CasaException;
+import com.estancias.repositorios.CasaRepositorio;
 import com.estancias.servicios.interfaces.CasaServicio;
 import com.estancias.servicios.interfaces.FamiliaServicio;
 import com.estancias.utils.FechaConverter;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -18,11 +18,10 @@ import java.util.List;
 @Slf4j
 public class CasaServicioImpl implements CasaServicio {
 
-    private final CRUDBaseRepository<Casa> repository;
+    private final CasaRepositorio repository;
     private final FamiliaServicio familiaServicio;
 
-    @Autowired
-    public CasaServicioImpl(CRUDBaseRepository<Casa> repository, FamiliaServicio familiaServicio) {
+    public CasaServicioImpl(CasaRepositorio repository, FamiliaServicio familiaServicio) {
         this.repository = repository;
         this.familiaServicio = familiaServicio;
     }
@@ -37,7 +36,7 @@ public class CasaServicioImpl implements CasaServicio {
         casa.setPropietario(propietario);
 
 
-        Integer id = repository.guardar(casa);
+        Integer id = repository.save(casa).getId();
         log.info("Se creó casa con id:", id);
         //Guardarlo
         return id;
@@ -45,36 +44,53 @@ public class CasaServicioImpl implements CasaServicio {
 
     @Override
     public Casa consulta(Integer idCasa) {
-        log.atInfo().log("Se busca a casa con id:" + idCasa);
-        return repository.obtenerPorID(idCasa);
+        log.info("Se busca a casa con id:" + idCasa);
+        return repository.findById(idCasa).orElse(null);
     }
 
     @Override
     public List<Casa> consulta() {
-        log.atInfo().log("Se busca a usuario todas las casas");
-        return repository.listarTodas();
+        log.info("Se busca todas las casas");
+        return repository.findAll();
     }
 
     @Override
     public Casa modificacion(Integer id, CasaAlta casaModificada) {
+        //Busco propietarios y casa
         Familia propietario = familiaServicio.consulta(casaModificada.getIdPropietario());
-        Casa casaAEditar = repository.obtenerPorID(id);
+        Casa casa = repository.findById(id).orElse(null);
 
-        if (propietario == null) {
+        //Validacion
+        if (propietario == null || casa == null) {
             return null;
         }
 
+        //Seteo modificacion y persisto.
         Casa casaConDatosNuevos = creaCasaDesdeCasaAlta(casaModificada);
         casaConDatosNuevos.setPropietario(propietario);
 
-        casaAEditar.editateConDatosDe(casaConDatosNuevos);
+        casa.editateConDatosDe(casaConDatosNuevos);
 
-        return repository.obtenerPorID(id);
+        repository.save(casa);
+
+        log.info("Se edito casa: {}", casa);
+        return casa;
     }
 
     @Override
-    public boolean eliminacion(Integer id) {
-        return repository.borrar(id);
+    public void eliminacion(Integer id) {
+        //Busco casa
+        Casa casa = repository.findById(id).orElse(null);
+
+        //Validacion
+        if (casa == null) {
+            log.error("No se puede eliminar casa " + id + ". La casa no existe");
+            throw new CasaException("La casa no existe.");
+        }
+
+        //Eliminacion
+        repository.delete(casa);
+        log.warn("Se eliminó casa con ID: {}", id);
     }
 
     private Casa creaCasaDesdeCasaAlta(CasaAlta casaAlta) {
